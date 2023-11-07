@@ -25,3 +25,15 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.border-gradient {
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to right, rgb(250, 250, 250), #272727) 1;
+}
+
+.border-gradient:hover {
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to right, rgba(17, 255, 96, 0.753), #272727) 1;
+}
