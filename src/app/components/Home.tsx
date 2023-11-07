@@ -19,8 +19,8 @@ export default function Home(): JSX.Element {
                         {
                             categories.map((ctg, index) => (
                                 index < 3 ?
-                                <ul className='my-3'>
-                                    <h2 key={index} className='text-white text-xl'>{ctg.name}</h2>
+                                <ul key={index} className='my-3'>
+                                    <h2 className='text-white text-xl'>{ctg.name}</h2>
                                     {
                                         ctg.items.map((it)=>(
                                            <li key={it} className='text-gray-300 my-2 cursor-pointer px-2 py-1 rounded-md hover:bg-green-600'>
