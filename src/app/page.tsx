@@ -1,9 +1,10 @@
-import Nav from "./components/Nav";
+import App from "./App";
+
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Nav />
+      <App />
     </main>
   )
 }
