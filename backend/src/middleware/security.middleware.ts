@@ -15,7 +15,7 @@ class AuthMiddleware {
         if (!username) {
             return res.status(401).json({ message: 'Token of authentication not provided' });
         }
-        else if(username !== process.env.SECRET_KEY){
+        else if(username !== this.secretKey){
             return res.status(500).json({message: 'Token invalid'})
         }
         jwt.sign({username}, this.secretKey, {expiresIn: '1h'})
