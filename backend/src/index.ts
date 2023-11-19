@@ -27,6 +27,7 @@ io.on("connection", async(socket)=>{
 })
 
 app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/models.route"));
+app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/users.route"));
 
 server.listen(process.env.PORT, ()=>{
     console.log(`Server on port ${process.env.PORT}`);
