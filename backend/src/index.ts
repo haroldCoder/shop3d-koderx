@@ -8,10 +8,13 @@ import AuthMiddleware from "./middleware/security.middleware";
 import ConnectMysql from "./connection/connectMysql";
 import Connection from "./connection/connection";
 import ConnectMongoDB from "./connection/connectMongodb";
+import cors from "cors";
 
 dotenv.config()
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
+
 const server = http.createServer(app);
 const io = new websocketserver(server);
 const authMiddleware = new AuthMiddleware(process.env.APP_KEY as string);
@@ -23,9 +26,7 @@ io.on("connection", async(socket)=>{
     socket.emit("shop3d");
 })
 
-app.get("/", authMiddleware.authenticate.bind(authMiddleware), (req, res)=>{
-    res.send("Hello")
-})
+app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/models.route"));
 
 server.listen(process.env.PORT, ()=>{
     console.log(`Server on port ${process.env.PORT}`);
