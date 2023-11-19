@@ -1,5 +1,4 @@
 import {Request, Response, Router} from "express";
-import UploadModel from "../controllers/UploadModels.controllers";
 const router = Router();
 import multer from "multer";
 import ModelsProduct from "../controllers/Modelsproduct.controllers";
