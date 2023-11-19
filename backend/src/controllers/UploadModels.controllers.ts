@@ -11,16 +11,16 @@ class UploadModel extends Models3d {
         this.req = req;
     }
 
-    getModels3d = async(name: string) =>{
-        const models3d = await this.getMongooseModel().findOne({});
+    getModels3d = async(id: number) =>{
+        const models3d = await this.getMongooseModel().findOne({id: id});
 
         return models3d;
     }
 
-    updloadModel = async(name: string, model: Buffer | undefined) => {
+    updloadModel = async(id: number, model: Buffer | undefined) => {
         try {
             const newmodel = new (this.getMongooseModel())({
-                name: name,
+                id: id,
                 model: model
             })
 

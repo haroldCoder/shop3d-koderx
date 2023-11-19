@@ -3,6 +3,7 @@ import UploadModel from "../controllers/UploadModels.controllers";
 const router = Router();
 import multer from "multer";
 import ModelsProduct from "../controllers/Modelsproduct.controllers";
+import { Models } from "../interfaces/models";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -12,7 +13,7 @@ router.route("/api/models")
     new ModelsProduct(req, res).getModels();
   })
   .post(upload.single('file'), (req: Request, res: Response)=>{
-     const {model} = req.body;
+     const model : Models = req.body;
 
      new ModelsProduct(req, res).createModel(model);
   });

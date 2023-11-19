@@ -15,15 +15,22 @@ class ModelsProduct extends ConnectMysql {
 
     getModels = async () => {
         const mongo: UploadModel = new UploadModel(this.req, this.res);
-        await this.connect.query(`SELECT * FROM models`, (err, result: Array<Models>) => {
+        await (await this.connect).execute(`SELECT * FROM models`, async(err, result: Array<Models>) => {
             if (err) {
                 console.error(err);
                 return;
             }
-            const models3d = result.map(async(md: Models) => {
-                const additionalData = { model: await mongo.getModels3d(md.name) };
-                return {...md, additionalData}
-            })
+            const models3d: Array<any> = new Array<any>();
+            await Promise.all(result.map(async (md) => {
+                // Obtener los modelos 3D
+                const model3D = await mongo.getModels3d(md.Id!);
+                
+                // Agregar el modelo al array
+                models3d.push({...md, model: model3D });
+            }));
+            
+            // Ahora models3d debería contener todos los modelos 3D
+            console.log(models3d);
 
             this.res.json(models3d);
         });
@@ -32,12 +39,20 @@ class ModelsProduct extends ConnectMysql {
     }
 
     createModel = async (model: Models) => {
-        await this.connect.query(`INSERT INTO model(name, description, price, Iduser) VALUES(${model.name}, ${model.description}, ${model.price}, ${model.Iduser})`, (err, result) => {
-            if (err) throw console.log(err);
+        try {
+            const result : any = await this.connect.execute(
+              'INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)',
+              [model.name, model.description, model.price, model.Iduser]
+            );
+
             const model3d = this.req.file?.buffer;
-            new UploadModel(this.req, this.res).updloadModel(model.name, model3d);
-            this.res.status(200).send("new model create");
-        })
+            new UploadModel(this.req, this.res).updloadModel(result.insertId, model3d);
+      
+            this.res.status(200).send('new model created');
+          } catch (err) {
+            console.error(err);
+            this.res.status(500).send('Error creating model');
+          }
     }
 }
 
