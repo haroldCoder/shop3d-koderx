@@ -1,8 +1,9 @@
 import React from 'react'
-import Image from 'next/image'
-import coder from '../assets/coder.png';
+import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
 
 export default function Nav() {
+    const {isSignedIn} = useAuth();
+
     return (
         <div className='p-8 pb-5 flex justify-between mx-3 border-gradient'>
             <div className='w-[50%] items-center justify-between flex'>
@@ -18,7 +19,9 @@ export default function Nav() {
                 </section>
             </div>
             <div>
-                <Image src={coder} alt='coder' className='w-10 h-10 rounded-md' />
+                {
+                    isSignedIn ? <UserButton afterSignOutUrl='/' /> : <button className='text-green-500'><SignInButton>Sign In</SignInButton></button>
+                }
             </div>
         </div>
     )

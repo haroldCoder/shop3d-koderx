@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.1",
+    "@clerk/themes": "^1.7.9",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
@@ -17,7 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router-dom": "^6.19.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
