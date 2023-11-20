@@ -14,3 +14,5 @@ router.route("/api/users")
 
     new Users(req, res).RegisterUser(usere);
 })
+
+module.exports = router;
