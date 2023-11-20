@@ -1,7 +1,6 @@
 import ConnectMysql from "../connection/connectMysql";
 import Socket from "./Socket.controllers";
 import {Express, request, response} from "express";
-import UploadModel from "./UploadModels.controllers";
 import { Models } from "../interfaces/models";
 import Models3d from "../models/Models3d";
 
@@ -15,7 +14,7 @@ class ModelsSockets extends Socket{
 
     SendAll = () : void =>{
         const mongo: Models3d = new Models3d();
-        this.connectmysql.connect.execute(`SELECT * FROM models`, async(err, result: Array<Models>) => {
+        this.connectmysql.connect!.execute(`SELECT * FROM models`, async(err, result: Array<Models>) => {
             if (err) {
                 console.error(err);
                 return;
@@ -34,7 +33,7 @@ class ModelsSockets extends Socket{
 
     Create = (): void => {
         this.socket.on('client:models', (mod: Models)=>{
-            this.connectmysql.connect.execute(`INSERT INTO user(name, description, price, Iduser) VALUES (${mod.name}, ${mod.description}, ${mod.price}, ${mod.Iduser})`, (err, result)=>{
+            this.connectmysql.connect!.execute(`INSERT INTO user(name, description, price, Iduser) VALUES (${mod.name}, ${mod.description}, ${mod.price}, ${mod.Iduser})`, (err, result)=>{
                 if(err){
                     console.log(err);
                     throw err;
@@ -43,6 +42,10 @@ class ModelsSockets extends Socket{
                 this.SendAll();
             })
         })
+    }
+
+    VerifyUser(): void {
+        
     }
 }
 

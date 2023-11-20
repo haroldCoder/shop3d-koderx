@@ -15,7 +15,7 @@ class ModelsProduct extends ConnectMysql {
 
     getModels = async () => {
         const mongo: UploadModel = new UploadModel(this.req, this.res);
-        await (await this.connect).execute(`SELECT * FROM models`, async(err, result: Array<Models>) => {
+        await (await this.connect!).execute(`SELECT * FROM models`, async(err, result: Array<Models>) => {
             if (err) {
                 console.error(err);
                 return;
@@ -40,7 +40,7 @@ class ModelsProduct extends ConnectMysql {
 
     createModel = async (model: Models) => {
         try {
-            const result : any = await this.connect.execute(
+            const result : any = await this.connect!.execute(
               'INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)',
               [model.name, model.description, model.price, model.Iduser]
             );

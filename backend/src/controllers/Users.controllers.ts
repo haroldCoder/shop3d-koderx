@@ -11,7 +11,7 @@ class Users extends ModelsProduct{
     }
 
     viewAllUsers = async() =>{
-        await this.connect.execute(`SELECT * FROM user`, (err, result : Array<user>)=>{
+        await this.connect!.execute(`SELECT * FROM user`, (err, result : Array<user>)=>{
             if(err){
                 console.log(err);
                 throw err;
@@ -22,7 +22,7 @@ class Users extends ModelsProduct{
     }
 
     RegisterUser = async(User: user) =>{
-        await this.connect.execute(`INSERT INTO user(name, email, cell, key_stripe) VALUES (${User.name}, ${User.email}, ${User.cell}, ${User.key_stripe})`, (err, result)=>{
+        await this.connect!.execute(`INSERT INTO user(name, email, cell, key_stripe) VALUES (${User.name}, ${User.email}, ${User.cell}, ${User.key_stripe})`, (err, result)=>{
             if(err){
                 console.log(err);
                 throw err;
