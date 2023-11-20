@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInButton, UserButton, useAuth } from '@clerk/nextjs';
+import { SignUpButton, UserButton, useAuth } from '@clerk/nextjs';
 
 export default function Nav() {
     const {isSignedIn} = useAuth();
@@ -20,7 +20,8 @@ export default function Nav() {
             </div>
             <div>
                 {
-                    isSignedIn ? <UserButton afterSignOutUrl='/' /> : <button className='text-green-500'><SignInButton>Sign In</SignInButton></button>
+                    isSignedIn ? <UserButton afterSignOutUrl='/' /> : 
+                    <button className='text-green-500'><SignUpButton>Sign In</SignUpButton></button>
                 }
             </div>
         </div>
