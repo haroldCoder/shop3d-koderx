@@ -1,6 +1,7 @@
 import {Server as websocketserver} from "socket.io";
 import {Express} from "express"
 import http from "http";
+import { user } from "../interfaces/users";
 
 abstract class Socket{
     socket: websocketserver
@@ -13,6 +14,7 @@ abstract class Socket{
             console.log('conect socket', socket.id);
             socket.emit("shop3d");
             this.SendAll();
+            this.Create();
         })
         
         this.socket.on("error", (error) => {
@@ -21,6 +23,8 @@ abstract class Socket{
     }
 
     abstract SendAll() : void;
+
+    abstract Create() : void;
 }
 
 export default Socket;

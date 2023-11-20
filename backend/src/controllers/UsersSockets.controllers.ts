@@ -19,6 +19,19 @@ class UsersSockets extends Socket{
            this.socket.emit('server:users', {users: result}); 
         })
     }
+
+    Create = (): void => {
+        this.socket.on('client:user', (useri: user)=>{
+            this.connectmsql.connect.execute(`INSERT INTO user(name, email, cell, key_stripe) VALUES (${useri.name}, ${useri.email}, ${useri.cell}, ${useri.key_stripe})`, (err, result)=>{
+                if(err){
+                    console.log(err);
+                    throw err;
+                }
+    
+                this.SendAll();
+            })
+        })
+    }
 }
 
 export default UsersSockets;

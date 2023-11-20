@@ -1,10 +1,14 @@
 import WebSocketServer from "./socket";
 
 class usersSocket extends WebSocketServer{
-    getAllUsers = () =>{
+    getAll = () =>{
         this.socket!.on("server:users", (users)=>{
             console.log(users);
         })
+    }
+    
+    create = (): void => {
+        
     }
 }
 

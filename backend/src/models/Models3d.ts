@@ -25,7 +25,7 @@ export default class Models3d extends Connection {
     }
 
     public getMongooseModel() {
-        return mongoose.model(this.model, this.models3d);
+          return mongoose.models.models3ds || mongoose.model(this.model, this.models3d);  
     }
 
     connectDB(): void {

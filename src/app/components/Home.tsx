@@ -4,15 +4,17 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { categories } from '../constants/categories';
 import WebSocketServer from '../services/socket';
 import UsersSockets from '../services/users_sockets';
+import ModelsSockets from '../services/models_sockets';
 
 export default function Home(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
-    const websocket: WebSocketServer = new UsersSockets();
+    const websocket: WebSocketServer = new ModelsSockets();
+
     useEffect(()=>{
         
 
         websocket.conectSocket();
-        websocket.getAllUsers()
+        websocket.getAll()
     }, [])
 
     const handleCloseMenu = () => {

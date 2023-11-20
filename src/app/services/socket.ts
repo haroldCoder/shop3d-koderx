@@ -16,7 +16,9 @@ abstract class WebSocketServer{
         })
     }
 
-    abstract getAllUsers() : void;
+    abstract getAll() : void;
+
+    abstract create() : void;
 }
 
 export default WebSocketServer;

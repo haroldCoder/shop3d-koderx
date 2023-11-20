@@ -8,6 +8,7 @@ import ConnectMongoDB from "./connection/connectMongodb";
 import cors from "cors";
 import Socket from "./controllers/Socket.controllers";
 import UsersSockets from "./controllers/UsersSockets.controllers";
+import ModelsSockets from "./controllers/ModelsSockets.controllers";
 
 dotenv.config()
 const app = express();
@@ -18,11 +19,12 @@ const authMiddleware = new AuthMiddleware(process.env.APP_KEY as string);
 const mysqlconnect: Connection = new ConnectMysql();
 const mongodbconnect: Connection = new ConnectMongoDB();
 const {Server} : Socket = new UsersSockets(app);
+const models_socket: Socket = new ModelsSockets(app);
 
 app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/models.route"));
 app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/users.route"));
 
-Server.listen(process.env.PORT, ()=>{
+models_socket.Server.listen(process.env.PORT, ()=>{
     console.log(`Server on port ${process.env.PORT}`);
     mysqlconnect.connectDB();
     mongodbconnect.connectDB();
