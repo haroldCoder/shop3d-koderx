@@ -7,9 +7,7 @@ abstract class WebSocketServer<T>{
 
     constructor(){
         this.socket = io('http://localhost:1001/?username=koderx23641$', { transports : ['websocket'] });
-        if(!this.socket.connect){
-            this.conectSocket();  
-        }
+        this.conectSocket();  
     }
 
     conectSocket = () =>{

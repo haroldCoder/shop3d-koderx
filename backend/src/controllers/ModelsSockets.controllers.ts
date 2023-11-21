@@ -27,12 +27,12 @@ class ModelsSockets extends Socket{
             }));
         
 
-            this.socket.emit("server:models", {models: models3d});
+            this.socket!.emit("server:models", {models: models3d});
         });
     }
 
     Create = (): void => {
-        this.socket.on('client:models', (mod: Models)=>{
+        this.socket!.on('client:models', (mod: Models)=>{
             this.connectmysql.connect!.execute(`INSERT INTO user(name, description, price, Iduser) VALUES (${mod.name}, ${mod.description}, ${mod.price}, ${mod.Iduser})`, (err, result)=>{
                 if(err){
                     console.log(err);

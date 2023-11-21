@@ -5,6 +5,7 @@ import { categories } from '../constants/categories';
 
 export default function Home(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
+    
 
     const handleCloseMenu = () => {
         setIsMenuOpen(!isMenuOpen); // change state of menu

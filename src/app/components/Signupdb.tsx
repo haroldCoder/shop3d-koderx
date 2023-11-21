@@ -16,9 +16,7 @@ export default function Signupdb() {
             "email": user?.emailAddresses[0].emailAddress!,
             "cell": user?.phoneNumbers[0].phoneNumber!,
             "key_stripe": key_stripe
-         })
-
-         location.href = "/"
+         }) 
     }
 
     return (

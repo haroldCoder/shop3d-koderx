@@ -4,13 +4,13 @@ import Connection from "./connection";
 
 
 class ConnectMysql extends Connection{
-    public connect?: mysql.Pool;
+    public connect?: mysql.Connection;
     public isconect: boolean = false
 
     constructor(){
         super();
         if(!this.isconect){
-            this.connect = mysql.createPool({
+            this.connect = mysql.createConnection({
                 user: process.env.MYSQL_USER!,
                 password: process.env.MYSQL_PASSWORD!,
                 host: process.env.MYSQL_HOST!,
@@ -25,8 +25,9 @@ class ConnectMysql extends Connection{
     connectDB(): void {
         this.connect!.on("connection",()=>{})
         console.log('connect to mysql');
-        this.connect?.getConnection((err, conection)=>{
-            conection.release()
+        this.connect!.on("error", (err)=>{
+            console.log(err);
+            
         })
     }
 }
