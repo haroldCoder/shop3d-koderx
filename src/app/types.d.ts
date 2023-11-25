@@ -4,8 +4,12 @@ export interface Models{
     description: string,
     Iduser: number,
     price: number,
-    model?: Buffer
-}
+    model?: {
+        id: number,
+        model: Buffer,
+        modeluri?: string
+    },
+}   
 
 export interface user{
     Id?: number,

@@ -13,7 +13,7 @@ router.route("/api/models")
   })
   .post(upload.single('file'), (req: Request, res: Response)=>{
      const model : Models = req.body;
-
+    
      new ModelsProduct(req, res).createModel(model);
   });
 

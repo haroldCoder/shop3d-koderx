@@ -17,11 +17,12 @@ class UploadModel extends Models3d {
         return models3d;
     }
 
-    updloadModel = async(id: number, model: Buffer | undefined) => {
+    updloadModel = async(id: number, model: Buffer | any, modeluri: string) => {
         try {
             const newmodel = new (this.getMongooseModel())({
                 id: id,
-                model: model
+                model: model,
+                modeluri: modeluri
             })
 
             await newmodel.save();

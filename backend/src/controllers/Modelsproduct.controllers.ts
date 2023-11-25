@@ -40,13 +40,14 @@ class ModelsProduct extends ConnectMysql {
 
     createModel = async (model: Models) => {
         try {
-            const result : any = await this.connect!.execute(
-              'INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)',
-              [model.name, model.description, model.price, model.Iduser]
-            );
+            // const result : any = await this.connect!.execute(
+            //   'INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)',
+            //   [model.name, model.description, model.price, model.Iduser]
+            // );
 
             const model3d = this.req.file?.buffer;
-            new UploadModel(this.req, this.res).updloadModel(result.insertId, model3d);
+            
+            new UploadModel(this.req, this.res).updloadModel(2, model3d, model.modeluri!);
       
             this.res.status(200).send('new model created');
           } catch (err) {

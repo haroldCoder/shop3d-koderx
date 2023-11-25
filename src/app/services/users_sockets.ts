@@ -1,18 +1,24 @@
 import { user } from "../types";
 import WebSocketServer from "./socket";
-import {io} from "socket.io-client";
-import {toast} from "react-hot-toast"
+import { io } from "socket.io-client";
+import { toast } from "react-hot-toast"
 
 class usersSocket extends WebSocketServer<user>{
-    constructor(){
+    constructor() {
         super();
-        this.socket = io('http://localhost:1001/?username=koderx23641$', { transports : ['websocket'] });
+        this.socket = io('http://localhost:1001/?username=koderx23641$', { transports: ['websocket'] });
     }
-    getAll = () => {
-
-        this.socket.on("server:users", (users) => {
-            console.log(users);
-        })
+    getAll = (): Array<user> | undefined => {
+        try {
+            this.socket.on("server:users", (users) => {
+                console.log(users);
+                return users;
+            })
+        }
+        catch(err){
+            return []
+        }
+        
     }
 
     create = (user: user): void => {
@@ -23,24 +29,24 @@ class usersSocket extends WebSocketServer<user>{
             "key_stripe": user.key_stripe
         })
 
-        this.socket.on("response:reg_user", (data)=>{
-            if(data.msg){
+        this.socket.on("response:reg_user", (data) => {
+            if (data.msg) {
                 toast.success("User register")
-                setInterval(()=>{
+                setInterval(() => {
                     location.href = "/"
                 }, 1500)
             }
-            else{
+            else {
                 toast.error("User exist or problems with server")
                 console.log(data);
-                
+
             }
         })
     }
 
     VerifiUserExist = (user: user): void => {
         console.log(user);
-        
+
         this.socket.emit("client:verify_user", {
             "name": user.name,
             "email": user.email,
@@ -48,16 +54,16 @@ class usersSocket extends WebSocketServer<user>{
             "key_stripe": user.key_stripe
         })
 
-        this.socket.on("server:response_verify", (data)=>{
+        this.socket.on("server:response_verify", (data) => {
             console.log(data);
-            
-            if(data.msg){
+
+            if (data.msg) {
                 toast.success("user exist");
-                setInterval(()=>{
-                    location.href = "/"  
+                setInterval(() => {
+                    location.href = "/"
                 }, 1000)
             }
-            else{
+            else {
                 toast.error("user not exist...")
                 location.href = "/signup-user"
             }

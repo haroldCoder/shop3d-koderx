@@ -3,7 +3,7 @@ import { user } from "../types";
 import {Models} from "../types"
 
 abstract class WebSocketServer<T>{
-    protected socket;
+    public socket;
 
     constructor(){
         this.socket = io('http://localhost:1001/?username=koderx23641$', { transports : ['websocket'] });
@@ -16,7 +16,7 @@ abstract class WebSocketServer<T>{
         })
     }
 
-    abstract getAll() : void;
+    abstract getAll(setter: React.Dispatch<React.SetStateAction<T[]>>): void;
 
     abstract create(data: T) : void;
 }

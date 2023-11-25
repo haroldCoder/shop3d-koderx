@@ -13,7 +13,8 @@ export default class Models3d extends Connection {
         this.model = model;
         this.models3d = new mongoose.Schema({
             id: { type: Number, require: true, unique: false },
-            model: { type: Buffer, require: true }
+            model: { type: Buffer, require: true },
+            modeluri: {type: String, require: true}
         })
     }
 
