@@ -12,8 +12,9 @@ import ModelsSockets from "./controllers/ModelsSockets.controllers";
 
 dotenv.config()
 const app = express();
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
+
 
 const authMiddleware = new AuthMiddleware(process.env.APP_KEY as string);
 const mysqlconnect: Connection = new ConnectMysql();
