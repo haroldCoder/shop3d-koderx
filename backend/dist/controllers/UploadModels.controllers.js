@@ -20,11 +20,10 @@ class UploadModel extends Models3d_1.default {
             const models3d = yield this.getMongooseModel().findOne({ id: id });
             return models3d;
         });
-        this.updloadModel = (id, model, modeluri) => __awaiter(this, void 0, void 0, function* () {
+        this.updloadModel = (id, modeluri) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const newmodel = new (this.getMongooseModel())({
                     id: id,
-                    model: model,
                     modeluri: modeluri
                 });
                 yield newmodel.save();

@@ -4,6 +4,5 @@ export interface Models{
     description: string,
     Iduser: number,
     price: number,
-    model?: Buffer | any,
     modeluri?: string
 }

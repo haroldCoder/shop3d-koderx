@@ -43,7 +43,7 @@ class ModelsProduct extends ConnectMysql {
 
             const model3d = this.req.file?.buffer;
             
-            new UploadModel(this.req, this.res).updloadModel(result[0]?.insertId, model3d, model.modeluri!);
+            new UploadModel(this.req, this.res).updloadModel(result[0]?.insertId, model.modeluri!);
       
             this.res.status(200).send('new model created');
           } catch (err) {

@@ -37,7 +37,7 @@ class ModelsProduct extends connectMysql_1.default {
             try {
                 const result = yield this.connect.execute('INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)', [model.name, model.description, model.price, model.Iduser]);
                 const model3d = (_a = this.req.file) === null || _a === void 0 ? void 0 : _a.buffer;
-                new UploadModels_controllers_1.default(this.req, this.res).updloadModel((_b = result[0]) === null || _b === void 0 ? void 0 : _b.insertId, model3d, model.modeluri);
+                new UploadModels_controllers_1.default(this.req, this.res).updloadModel((_b = result[0]) === null || _b === void 0 ? void 0 : _b.insertId, model.modeluri);
                 this.res.status(200).send('new model created');
             }
             catch (err) {
