@@ -57,7 +57,7 @@ export default function Home(): JSX.Element {
             <section className='py-4 w-[100%]'>
                 {
                     models.map((md: Models) => (
-                        <CardModel name={md.name} description={md.description} price={md.price} model={md.model} Iduser={md.Iduser}  />
+                        <CardModel key={md.name} name={md.name} description={md.description} price={md.price} model={md.model} Iduser={md.Iduser}  />
                     ))
                 }
             </section>
