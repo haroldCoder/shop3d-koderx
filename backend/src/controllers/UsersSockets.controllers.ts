@@ -43,9 +43,7 @@ class UsersSockets extends Socket {
 
     VerifyUser = (): void => {
         this.sk.on('client:verify_user', (useri: user) => {
-            console.log(useri);
-
-            this.connectmsql.connect!.execute(`SELECT * FROM user WHERE (name="${useri.name}" OR email = "${useri.email}") AND cell = "${useri.cell}"`, (err, result: Array<user>) => {
+            this.connectmsql.connect!.execute(`SELECT * FROM user WHERE name="${useri.name}" OR email = "${useri.email}"`, (err, result: Array<user>) => {
                 if (err) {
                     console.log(err);
                     throw err;
