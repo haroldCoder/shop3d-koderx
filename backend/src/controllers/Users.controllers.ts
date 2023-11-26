@@ -53,6 +53,23 @@ class Users extends ModelsProduct{
 
         return false;
     }
+
+    VerifyUserForApi = (useri: user) =>{
+        this.connect!.execute(`SELECT * FROM user WHERE name="${useri.name}" OR email = "${useri.email}"`, (err, result: Array<user>) => {
+            if (err) {
+                console.log(err);
+                this.res.status(500).json(err);
+                throw err;
+            }
+
+            if (result.length > 0) {
+                this.res.status(200).json({ msg: true })
+            }
+            else {
+                this.res.status(200).json({ msg: false })
+            }
+        })
+    }
 }
 
 export default Users;

@@ -2,20 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { categories } from '../constants/categories';
-import WebSocketServer from '../services/socket';
 import { Models } from '../types';
-import ModelsSockets from '../services/models_sockets';
 import CardModel from './CardModel';
 
 export default function Home(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
-    const websocket_model: WebSocketServer<Models> = new ModelsSockets();
     const [models, setModels] = useState<Array<Models>>([]);
 
     useEffect(() => {
-        websocket_model.socket.on("server:models", (data)=>{
-            setModels(data.models)
-        })
+
     }, [])
 
     const handleCloseMenu = () => {

@@ -2,17 +2,31 @@
 import React, { useEffect } from 'react'
 import styles from '../Loader.module.css';
 import { useUser } from "@clerk/nextjs"
-import usersSocket from '../services/users_sockets';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function Signdb() {
     const { user, isLoaded } = useUser();
-    const websocket2 = new usersSocket();
-    if (isLoaded) {
-        websocket2.VerifiUserExist({
+    if (user) {
+        console.log(user);
+
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/verify?username=${process.env.NEXT_PUBLIC_AUTH_API}`, {
             "name": user?.fullName!,
             "email": user?.emailAddresses[0].emailAddress!,
-            "cell": user?.phoneNumbers[0]?.phoneNumber! || "0",
+            "cell": user?.phoneNumbers[0]?.phoneNumber! || "0"
         })
+            .then((res) => {
+                if (res.data.msg) {
+                    toast.success("user exist");
+                    setInterval(() => {
+                        location.href = "/"
+                    })
+                }
+                else {
+                    toast.error("user no exist....")
+                    location.href = "/signup-user"
+                }
+            })
     }
 
     return (

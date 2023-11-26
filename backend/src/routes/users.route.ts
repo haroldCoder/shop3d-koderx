@@ -15,4 +15,11 @@ router.route("/api/users")
     new Users(req, res).RegisterUser(usere);
 })
 
+router.route("/api/user/verify")
+.post((req: Request, res: Response)=>{
+    const useri: user = req.body;
+
+    new Users(req, res).VerifyUserForApi(useri);
+})
+
 module.exports = router;
