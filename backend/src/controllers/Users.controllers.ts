@@ -22,14 +22,36 @@ class Users extends ModelsProduct{
     }
 
     RegisterUser = async(User: user) =>{
-        await this.connect!.execute(`INSERT INTO user(name, email, cell, key_stripe) VALUES (${User.name}, ${User.email}, ${User.cell}, ${User.key_stripe})`, (err, result)=>{
-            if(err){
+        if(!this.verifyUser(User)){
+            await this.connect!.execute(`INSERT INTO user(name, email, cell, key_stripe) VALUES (${User.name}, ${User.email}, ${User.cell}, ${User.key_stripe})`, (err, result)=>{
+                if(err){
+                    console.log(err);
+                    this.res.status(500).json(err)
+                    throw err;
+                }
+
+                this.res.status(200).send("new user register");
+            })
+        }
+        this.res.status(200).json({ msg: false })
+    }
+
+    verifyUser = (useri: user): boolean =>{
+        this.connect!.execute(`SELECT * FROM user WHERE name="${useri.name}" OR email = "${useri.email}"`, (err, result: Array<user>) => {
+            if (err) {
                 console.log(err);
                 throw err;
             }
 
-            this.res.status(200).send("new user register");
+            if (result.length > 0) {
+                return true
+            }
+            else {
+                return false
+            }
         })
+
+        return false;
     }
 }
 
