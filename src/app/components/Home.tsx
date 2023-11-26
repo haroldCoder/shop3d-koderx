@@ -4,13 +4,19 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { categories } from '../constants/categories';
 import { Models } from '../types';
 import CardModel from './CardModel';
+import axios from 'axios';
 
 export default function Home(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
     const [models, setModels] = useState<Array<Models>>([]);
 
     useEffect(() => {
+        const getModels = async() =>{
+            const models = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/models?username=${process.env.NEXT_PUBLIC_AUTH_API}`)
+            setModels(models.data);
+        }
 
+        getModels();
     }, [])
 
     const handleCloseMenu = () => {

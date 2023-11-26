@@ -1,5 +1,6 @@
 import React from 'react'
 import { SignUpButton, UserButton, useAuth } from '@clerk/nextjs';
+import toast from 'react-hot-toast';
 
 export default function Nav() {
     const {isSignedIn} = useAuth();

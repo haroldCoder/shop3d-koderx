@@ -22,15 +22,11 @@ class ModelsProduct extends ConnectMysql {
             }
             const models3d: Array<any> = new Array<any>();
             await Promise.all(result.map(async (md) => {
-                // Obtener los modelos 3D
                 const model3D = await mongo.getModels3d(md.Id!);
                 
-                // Agregar el modelo al array
                 models3d.push({...md, model: model3D });
             }));
             
-            // Ahora models3d debería contener todos los modelos 3D
-            console.log(models3d);
 
             this.res.json(models3d);
         });

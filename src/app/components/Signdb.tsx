@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import styles from '../Loader.module.css';
 import { useUser } from "@clerk/nextjs"
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Signdb() {
     const { user, isLoaded } = useUser();
@@ -20,7 +20,7 @@ export default function Signdb() {
                     toast.success("user exist");
                     setInterval(() => {
                         location.href = "/"
-                    })
+                    },1500)
                 }
                 else {
                     toast.error("user no exist....")
@@ -35,6 +35,7 @@ export default function Signdb() {
             <div className={styles.loader}>
                 <div className={styles.spinner}></div>
             </div>
+            <Toaster />
         </div>
 
     )
