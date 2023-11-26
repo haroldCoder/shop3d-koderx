@@ -4,13 +4,13 @@ import Connection from "./connection";
 
 
 class ConnectMysql extends Connection{
-    public connect?: mysql.Connection;
+    public connect?: mysql.Pool;
     public isconect: boolean = false
 
     constructor(){
         super();
         if(!this.isconect){
-            this.connect = mysql.createConnection({
+            this.connect = mysql.createPool({
                 user: process.env.MYSQL_USER!,
                 password: process.env.MYSQL_PASSWORD!,
                 host: process.env.MYSQL_HOST!,

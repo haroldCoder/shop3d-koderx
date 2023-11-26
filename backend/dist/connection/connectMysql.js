@@ -10,7 +10,7 @@ class ConnectMysql extends connection_1.default {
         super();
         this.isconect = false;
         if (!this.isconect) {
-            this.connect = mysql2_1.default.createConnection({
+            this.connect = mysql2_1.default.createPool({
                 user: process.env.MYSQL_USER,
                 password: process.env.MYSQL_PASSWORD,
                 host: process.env.MYSQL_HOST,
