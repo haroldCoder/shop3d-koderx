@@ -6,6 +6,8 @@ import dynamic from 'next/dynamic';
 import Model3dMake from './Model3dMake';
 
 export default function CardModel(data: Models) {
+    console.log(data);
+    
     
   return (
     <div className='bg-gray-900 w-[30%] flex flex-col gap-y-10 cursor-pointer p-8 rounded-md border-[1.5px] border-green-500 hover:bg-gradient-to-tr to-green-600 from-gray-700'>

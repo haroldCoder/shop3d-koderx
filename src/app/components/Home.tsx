@@ -54,7 +54,7 @@ export default function Home(): JSX.Element {
                     </button>
                 </div>
             </section>
-            <section className='py-4 w-[100%]'>
+            <section className='py-4 w-[100%] flex gap-x-10'>
                 {
                     models.map((md: Models) => (
                         <CardModel key={md.name} name={md.name} description={md.description} price={md.price} model={md.model} Iduser={md.Iduser}  />

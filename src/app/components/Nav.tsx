@@ -1,6 +1,7 @@
 import React from 'react'
 import { SignUpButton, UserButton, useAuth } from '@clerk/nextjs';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 export default function Nav() {
     const {isSignedIn} = useAuth();
@@ -16,7 +17,7 @@ export default function Nav() {
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Services</h4>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>About</h4>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Enterprise</h4>
-                    <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Projects</h4>
+                    <Link href="/create-model"><h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Projects</h4></Link>
                 </section>
             </div>
             <div>

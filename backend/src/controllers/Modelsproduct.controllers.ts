@@ -36,20 +36,34 @@ class ModelsProduct extends ConnectMysql {
 
     createModel = async (model: Models) => {
         try {
-            const result : any = await this.connect!.execute(
-              'INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)',
-               [model.name, model.description, model.price, model.Iduser]
-            );
+            await this.connect!.execute(`INSERT INTO models(name, description, price, Iduser) VALUES("${model.name}", "${model.description}", "${model.price}", ${model.Iduser})`, (err, result: any)=>{
+                if(err){
+                    console.log(err);
+                    this.res.status(500).send(err)
+                    throw err;
+                }
 
-            const model3d = this.req.file?.buffer;
-            
-            new UploadModel(this.req, this.res).updloadModel(result[0]?.insertId, model.modeluri!);
-      
+                console.log(result);
+                new UploadModel(this.req, this.res).updloadModel(result.insertId, model.modeluri!);
+            });
+
             this.res.status(200).send('new model created');
           } catch (err) {
             console.error(err);
             this.res.status(500).send('Error creating model');
           }
+    }
+
+    getLastId = () =>{
+        this.connect?.execute(`SELECT MAX(Id) as lastid FROM models`, (err, resutl: Array<any>)=>{
+            if(err){
+                console.log(err);
+                this.res.status(500).send(err)
+                throw err;
+            }
+   
+            this.res.status(200).json({"lastid": resutl[0]});
+        })
     }
 }
 

@@ -17,4 +17,9 @@ router.route("/api/models")
      new ModelsProduct(req, res).createModel(model);
   });
 
+router.route("/api/models/lastid")
+.get((req: Request, res: Response)=>{
+  new ModelsProduct(req, res).getLastId();
+})
+
 module.exports = router;

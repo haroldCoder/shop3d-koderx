@@ -19,4 +19,9 @@ router.route("/api/user/verify")
     const useri = req.body;
     new Users_controllers_1.default(req, res).VerifyUserForApi(useri);
 });
+router.route("/api/user/:name/:phone")
+    .get((req, res) => {
+    const { name, phone } = req.params;
+    new Users_controllers_1.default(req, res).getIdByPhoneAndNumber(name, phone);
+});
 module.exports = router;

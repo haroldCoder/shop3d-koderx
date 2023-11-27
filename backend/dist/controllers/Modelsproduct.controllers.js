@@ -33,11 +33,16 @@ class ModelsProduct extends connectMysql_1.default {
             }));
         });
         this.createModel = (model) => __awaiter(this, void 0, void 0, function* () {
-            var _a, _b;
             try {
-                const result = yield this.connect.execute('INSERT INTO models(name, description, price, Iduser) VALUES(?, ?, ?, ?)', [model.name, model.description, model.price, model.Iduser]);
-                const model3d = (_a = this.req.file) === null || _a === void 0 ? void 0 : _a.buffer;
-                new UploadModels_controllers_1.default(this.req, this.res).updloadModel((_b = result[0]) === null || _b === void 0 ? void 0 : _b.insertId, model.modeluri);
+                yield this.connect.execute(`INSERT INTO models(name, description, price, Iduser) VALUES("${model.name}", "${model.description}", "${model.price}", ${model.Iduser})`, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        this.res.status(500).send(err);
+                        throw err;
+                    }
+                    console.log(result);
+                    new UploadModels_controllers_1.default(this.req, this.res).updloadModel(result.insertId, model.modeluri);
+                });
                 this.res.status(200).send('new model created');
             }
             catch (err) {
@@ -45,6 +50,17 @@ class ModelsProduct extends connectMysql_1.default {
                 this.res.status(500).send('Error creating model');
             }
         });
+        this.getLastId = () => {
+            var _a;
+            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`SELECT MAX(Id) as lastid FROM models`, (err, resutl) => {
+                if (err) {
+                    console.log(err);
+                    this.res.status(500).send(err);
+                    throw err;
+                }
+                this.res.status(200).json({ "lastid": resutl[0] });
+            });
+        };
         this.req = req;
         this.res = res;
     }

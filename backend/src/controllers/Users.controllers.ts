@@ -70,6 +70,18 @@ class Users extends ModelsProduct{
             }
         })
     }
+
+    getIdByPhoneAndNumber = (name: string, phone: string) =>{
+        this.connect?.execute(`SELECT Id as id FROM user WHERE name="${name}" AND cell="${phone}"`, (err, reult: Array<any>)=>{
+            if (err) {
+                console.log(err);
+                this.res.status(500).json(err);
+                throw err;
+            }
+
+            this.res.status(200).json(reult[0]);
+        })
+    }
 }
 
 export default Users;

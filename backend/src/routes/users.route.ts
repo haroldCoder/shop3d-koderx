@@ -22,4 +22,10 @@ router.route("/api/user/verify")
     new Users(req, res).VerifyUserForApi(useri);
 })
 
+router.route("/api/user/:name/:phone")
+.get((req: Request, res: Response)=>{
+    const {name, phone} = req.params;
+    new Users(req, res).getIdByPhoneAndNumber(name, phone);
+})
+
 module.exports = router;

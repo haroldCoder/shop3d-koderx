@@ -17,4 +17,8 @@ router.route("/api/models")
     const model = req.body;
     new Modelsproduct_controllers_1.default(req, res).createModel(model);
 });
+router.route("/api/models/lastid")
+    .get((req, res) => {
+    new Modelsproduct_controllers_1.default(req, res).getLastId();
+});
 module.exports = router;

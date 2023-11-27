@@ -6,7 +6,6 @@ export interface Models{
     price: number,
     model?: {
         id: number,
-        model: Buffer,
         modeluri?: string
     },
 }   
