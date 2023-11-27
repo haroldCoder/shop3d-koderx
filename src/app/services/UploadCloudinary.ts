@@ -22,7 +22,7 @@ const uploadToCloudinary = async (file: any, Id: number) => {
         );
 
         // Aquí puedes realizar acciones con los datos de respuesta
-        return response.data.url
+        return response.data.secure_url
     } catch (error) {
         console.error('Error al subir la imagen:', error);
     }
