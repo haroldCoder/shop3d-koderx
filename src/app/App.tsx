@@ -8,13 +8,8 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function App() {
     return (
         <>
-            <BrowserRouter>
-                <Nav />
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                </Routes>
-
-            </BrowserRouter>
+            <Nav />
+            <Home />
             <Toaster />
         </>
     )

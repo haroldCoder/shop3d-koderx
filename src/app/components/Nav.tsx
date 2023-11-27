@@ -13,7 +13,7 @@ export default function Nav() {
                     <h2 className='text-white text-2xl'>Shop 3D</h2>
                 </section>
                 <section className='flex items-center justify-between gap-x-12'>
-                    <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Home</h4>
+                <Link href="/"><h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Home</h4></Link>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Services</h4>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>About</h4>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Enterprise</h4>

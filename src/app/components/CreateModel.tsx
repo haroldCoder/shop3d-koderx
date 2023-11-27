@@ -6,6 +6,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Canvas } from 'react-three-fiber';
 import Model3dMake from './Model3dMake';
 import { useUser } from '@clerk/nextjs';
+import Nav from './Nav';
 
 export default function CreateModel() {
   const [modeluri, setModeluri] = useState<string>("");
@@ -77,41 +78,44 @@ export default function CreateModel() {
     axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/models?username=${process.env.NEXT_PUBLIC_AUTH_API}`, formData)
   };
   return (
-    <div className='flex flex-col flex-wrap w-[100%] items-center py-12 justify-center'>
-      <form action="" onSubmit={handleSubmit} className='flex flex-col w-[40%] gap-y-16'>
-        <input onChange={handleFileChange} type="file" className="border border-gray-300 p-2" />
-        {
-          modeluri != "" ?
-            <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} style={{ width: "100%", height: "50vh", marginTop: "3%", position: "sticky", left: "60%" }}>
-              <color attach="background" args={["#000"]} />
-              <PresentationControls speed={1.5} global zoom={.5} polar={[-0.1, Math.PI / 4]}>
-                <Stage environment={"sunset"}>
-                  <Model3dMake model={modeluri} />
-                </Stage>
-              </PresentationControls>
-            </Canvas>
-            : null
-        }
-        <input type="text" placeholder='Name of product' onChange={(e)=>{
-          setData((data)=>({
-            ...data,
-            name: e.target.value
-          }))
-        }} className='text-white border-b-[1.5px] border-green-400 hover:bg-gray-800 bg-black p-4 rounded-md' />
-        <input type="text" placeholder='Description' onChange={(e)=>{
-          setData((data)=>({
-            ...data,
-            description: e.target.value
-          }))
-        }} className='text-white border-b-[1.5px] border-green-400 hover:bg-gray-800 bg-black p-4 rounded-md' />
-        <input type="number" placeholder='Price' onChange={(e)=>{
-          setData((data)=>({
-            ...data,
-            price: e.target.value
-          }))
-        }} className='text-white border-b-[1.5px] border-green-400 hover:bg-gray-800 bg-black p-4 rounded-md' />
-        <button type="submit" className="bg-green-500 font-semibold text-white p-2 rounded">Submit</button>
-      </form>
-    </div>
+    <>
+      <Nav />
+      <div className='flex flex-col flex-wrap w-[100%] items-center py-12 justify-center'>
+        <form action="" onSubmit={handleSubmit} className='flex flex-col w-[40%] gap-y-16'>
+          <input onChange={handleFileChange} type="file" className="border border-gray-300 p-2" />
+          {
+            modeluri != "" ?
+              <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} style={{ width: "100%", height: "50vh", marginTop: "3%", position: "sticky", left: "60%" }}>
+                <color attach="background" args={["#000"]} />
+                <PresentationControls speed={1.5} global zoom={.5} polar={[-0.1, Math.PI / 4]}>
+                  <Stage environment={"sunset"}>
+                    <Model3dMake model={modeluri} />
+                  </Stage>
+                </PresentationControls>
+              </Canvas>
+              : null
+          }
+          <input type="text" placeholder='Name of product' onChange={(e)=>{
+            setData((data)=>({
+              ...data,
+              name: e.target.value
+            }))
+          }} className='text-white border-b-[1.5px] border-green-400 hover:bg-gray-800 bg-black p-4 rounded-md' />
+          <input type="text" placeholder='Description' onChange={(e)=>{
+            setData((data)=>({
+              ...data,
+              description: e.target.value
+            }))
+          }} className='text-white border-b-[1.5px] border-green-400 hover:bg-gray-800 bg-black p-4 rounded-md' />
+          <input type="number" placeholder='Price' onChange={(e)=>{
+            setData((data)=>({
+              ...data,
+              price: e.target.value
+            }))
+          }} className='text-white border-b-[1.5px] border-green-400 hover:bg-gray-800 bg-black p-4 rounded-md' />
+          <button type="submit" className="bg-green-500 font-semibold text-white p-2 rounded">Submit</button>
+        </form>
+      </div>
+    </>
   )
 }
