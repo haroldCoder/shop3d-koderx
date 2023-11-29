@@ -22,4 +22,11 @@ router.route("/api/models/lastid")
   new ModelsProduct(req, res).getLastId();
 })
 
+router.route("/api/model/user/:iduser")
+.get((req: Request, res: Response)=>{
+  const {iduser} = req.params; 
+
+  new ModelsProduct(req, res).getAuthorByIduser(parseInt(iduser));
+})
+
 module.exports = router;

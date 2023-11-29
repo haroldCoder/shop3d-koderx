@@ -21,4 +21,9 @@ router.route("/api/models/lastid")
     .get((req, res) => {
     new Modelsproduct_controllers_1.default(req, res).getLastId();
 });
+router.route("/api/model/user/:iduser")
+    .get((req, res) => {
+    const { iduser } = req.params;
+    new Modelsproduct_controllers_1.default(req, res).getAuthorByIduser(parseInt(iduser));
+});
 module.exports = router;

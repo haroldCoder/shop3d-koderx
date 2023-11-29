@@ -65,6 +65,18 @@ class ModelsProduct extends ConnectMysql {
             this.res.status(200).json({"lastid": resutl[0]});
         })
     }
+
+    getAuthorByIduser = (Iduser: number) =>{
+        this.connect?.execute(`SELECT user.name as user, user.key_stripe FROM models INNER JOIN user ON models.Iduser = user.Id WHERE Iduser = ${Iduser}`, (err, result: Array<any>)=>{
+            if(err){
+                console.log(err);
+                this.res.status(500).send(err)
+                throw err;
+            }
+
+            this.res.status(200).json(result[0]);
+        })
+    }
 }
 
 export default ModelsProduct;
