@@ -24,6 +24,7 @@ const mongodbconnect: Connection = new ConnectMongoDB();
 
 app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/models.route"));
 app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/users.route"));
+app.use("/", authMiddleware.authenticate.bind(authMiddleware), require("./routes/carshop.route"));
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Server on port ${process.env.PORT}`);
