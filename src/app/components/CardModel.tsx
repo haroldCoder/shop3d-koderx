@@ -37,7 +37,7 @@ export default function CardModel(data: Models) {
                 {
                     popup ?
                     <div className='absolute w-[65%] z-10 top-[15%] left-[20%]'>
-                        <CardMaximize setPopup={setPopUp} name={data.name} model={data.model?.modeluri} description={data.description} price={data.price} Iduser={data.Iduser} />
+                        <CardMaximize Id={data.Id} setPopup={setPopUp} name={data.name} model={data.model?.modeluri} description={data.description} price={data.price} Iduser={data.Iduser} />
                     </div>
                     : null
                 }

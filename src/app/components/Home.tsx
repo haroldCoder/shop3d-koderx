@@ -18,6 +18,7 @@ export default function Home(): JSX.Element {
 
         getModels();
     }, [])
+    
 
     const handleCloseMenu = () => {
         setIsMenuOpen(!isMenuOpen); // change state of menu
@@ -57,7 +58,7 @@ export default function Home(): JSX.Element {
             <section className='py-4 w-[100%] flex gap-x-10'>
                 {
                     models.map((md: Models) => (
-                        <CardModel key={md.name} name={md.name} description={md.description} price={md.price} model={md.model} Iduser={md.Iduser}  />
+                        <CardModel Id={md.Id} key={md.name} name={md.name} description={md.description} price={md.price} model={md.model} Iduser={md.Iduser}  />
                     ))
                 }
             </section>
