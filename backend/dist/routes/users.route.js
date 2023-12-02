@@ -24,4 +24,9 @@ router.route("/api/user/:name/:phone")
     const { name, phone } = req.params;
     new Users_controllers_1.default(req, res).getIdByPhoneAndNumber(name, phone);
 });
+router.route("/api/user/:id")
+    .get((req, res) => {
+    const { id } = req.params;
+    new Users_controllers_1.default(req, res).getDatauserById(parseInt(id));
+});
 module.exports = router;

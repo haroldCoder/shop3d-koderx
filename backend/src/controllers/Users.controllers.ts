@@ -82,6 +82,18 @@ class Users extends ModelsProduct{
             this.res.status(200).json(reult[0]);
         })
     }
+
+    getDatauserById = (iduser: number) =>{
+        this.connect?.execute(`SELECT * FROM user WHERE Id = ${iduser}`, (err, result: Array<user>)=>{
+            if (err) {
+                console.log(err);
+                this.res.status(500).json(err);
+                throw err;
+            }
+
+            this.res.status(200).json(result[0]);
+        })
+    }
 }
 
 export default Users;

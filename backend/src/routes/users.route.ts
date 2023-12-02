@@ -28,4 +28,11 @@ router.route("/api/user/:name/:phone")
     new Users(req, res).getIdByPhoneAndNumber(name, phone);
 })
 
+router.route("/api/user/:id")
+.get((req: Request, res: Response)=>{
+    const {id} = req.params;
+
+    new Users(req, res).getDatauserById(parseInt(id));
+})
+
 module.exports = router;

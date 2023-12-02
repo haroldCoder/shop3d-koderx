@@ -67,7 +67,7 @@ class ModelsProduct extends ConnectMysql {
     }
 
     getAuthorByIduser = (Iduser: number) =>{
-        this.connect?.execute(`SELECT user.name as user, user.key_stripe FROM models INNER JOIN user ON models.Iduser = user.Id WHERE Iduser = ${Iduser}`, (err, result: Array<any>)=>{
+        this.connect?.execute(`SELECT user.name as user, user.key_stripe, user.email FROM models INNER JOIN user ON models.Iduser = user.Id WHERE Iduser = ${Iduser}`, (err, result: Array<any>)=>{
             if(err){
                 console.log(err);
                 this.res.status(500).send(err)

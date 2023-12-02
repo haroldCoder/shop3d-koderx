@@ -34,6 +34,7 @@ class Carshop extends ConnectMysql {
                         } else {
                             const model3D = await mongo.getModels3d(result[0].Id!);
                             arrayCarshop.push({
+                                Id: result[0].Id,
                                 name: result[0].name,
                                 description: result[0].description,
                                 Iduser: result[0].Iduser,
@@ -96,6 +97,18 @@ class Carshop extends ConnectMysql {
                 }
             });
         });
+    }
+
+    RemoveModelCarshop = async(iduser: number, idmodel: number) =>{
+       await this.connect?.execute(`DELETE FROM carshop WHERE Iduser = ${iduser} AND Idproduct = ${idmodel}`, (err, res)=>{
+            if (err) {
+                console.log(err);
+                this.res.status(500).send(err)
+                throw err;
+            }
+
+            this.res.status(200).send("remove model");
+        })
     }
 }
 

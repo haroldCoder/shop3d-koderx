@@ -38,6 +38,7 @@ class Carshop extends connectMysql_1.default {
                             else {
                                 const model3D = yield mongo.getModels3d(result[0].Id);
                                 arrayCarshop.push({
+                                    Id: result[0].Id,
                                     name: result[0].name,
                                     description: result[0].description,
                                     Iduser: result[0].Iduser,
@@ -101,6 +102,17 @@ class Carshop extends connectMysql_1.default {
                 });
             });
         };
+        this.RemoveModelCarshop = (iduser, idmodel) => __awaiter(this, void 0, void 0, function* () {
+            var _b;
+            yield ((_b = this.connect) === null || _b === void 0 ? void 0 : _b.execute(`DELETE FROM carshop WHERE Iduser = ${iduser} AND Idproduct = ${idmodel}`, (err, res) => {
+                if (err) {
+                    console.log(err);
+                    this.res.status(500).send(err);
+                    throw err;
+                }
+                this.res.status(200).send("remove model");
+            }));
+        });
         this.req = req;
         this.res = res;
     }

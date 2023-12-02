@@ -24,4 +24,10 @@ router.route("/api/carshop/exist/:iduser/:idmodel")
     new Carshop(req, res).existModelInCarshop(parseInt(iduser), parseInt(idmodel));
 })
 
+.delete((req: Request, res: Response)=>{
+    const {iduser, idmodel} = req.params;
+
+    new Carshop(req, res).RemoveModelCarshop(parseInt(iduser), parseInt(idmodel));
+})
+
 module.exports = router;

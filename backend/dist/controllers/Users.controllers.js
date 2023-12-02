@@ -79,6 +79,17 @@ class Users extends Modelsproduct_controllers_1.default {
                 this.res.status(200).json(reult[0]);
             });
         };
+        this.getDatauserById = (iduser) => {
+            var _a;
+            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`SELECT * FROM user WHERE Id = ${iduser}`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    this.res.status(500).json(err);
+                    throw err;
+                }
+                this.res.status(200).json(result[0]);
+            });
+        };
         this.req = req;
         this.res = res;
     }

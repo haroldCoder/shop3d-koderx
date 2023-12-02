@@ -63,7 +63,7 @@ class ModelsProduct extends connectMysql_1.default {
         };
         this.getAuthorByIduser = (Iduser) => {
             var _a;
-            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`SELECT user.name as user, user.key_stripe FROM models INNER JOIN user ON models.Iduser = user.Id WHERE Iduser = ${Iduser}`, (err, result) => {
+            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`SELECT user.name as user, user.key_stripe, user.email FROM models INNER JOIN user ON models.Iduser = user.Id WHERE Iduser = ${Iduser}`, (err, result) => {
                 if (err) {
                     console.log(err);
                     this.res.status(500).send(err);
