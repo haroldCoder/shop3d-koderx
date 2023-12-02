@@ -16,4 +16,9 @@ router.route("/api/carshop")
     const { iduser, idmodel } = req.body;
     new Carshop_controllers_1.default(req, res).addModelToCar(parseInt(iduser), parseInt(idmodel));
 });
+router.route("/api/carshop/exist/:iduser/:idmodel")
+    .get((req, res) => {
+    const { iduser, idmodel } = req.params;
+    new Carshop_controllers_1.default(req, res).existModelInCarshop(parseInt(iduser), parseInt(idmodel));
+});
 module.exports = router;

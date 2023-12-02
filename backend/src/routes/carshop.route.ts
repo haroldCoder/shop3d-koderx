@@ -17,4 +17,11 @@ router.route("/api/carshop")
     new Carshop(req, res).addModelToCar(parseInt(iduser), parseInt(idmodel));
 })
 
+router.route("/api/carshop/exist/:iduser/:idmodel")
+.get((req: Request, res: Response)=>{
+    const {iduser, idmodel} = req.params;
+
+    new Carshop(req, res).existModelInCarshop(parseInt(iduser), parseInt(idmodel));
+})
+
 module.exports = router;
