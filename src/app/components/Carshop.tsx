@@ -7,6 +7,7 @@ import { Canvas } from 'react-three-fiber';
 import { PresentationControls, Stage } from '@react-three/drei';
 import Model3dMake from './Model3dMake';
 import Nav from './Nav';
+import toast from 'react-hot-toast';
 
 export default function Carshop() {
   const [data, setData] = useState<Models[]>([]);
@@ -25,8 +26,36 @@ export default function Carshop() {
       getCarshop();
     }
   }, [user])
+  console.log(data);
 
 
+  const RemoveModel = (iduser: number, idmodel: number) => {
+    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/carshop/exist/${iduser}/${idmodel}?username=${process.env.NEXT_PUBLIC_AUTH_API}`)
+      .then((res) => {
+        toast.success(res.data.msg);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const payModel = async (iduser: number, price: number, name: string) => {
+    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${iduser}?username=${process.env.NEXT_PUBLIC_AUTH_API}`)
+      .then(async (res) => {
+        await axios.post(`https://stripe-node-microservice.vercel.app/api/stripe`, {
+          api_key_stripe: res.data.key_stripe,
+          mode: "payment",
+          price: price,
+          quantity: 1,
+          currency: 'usd',
+          name: name,
+          success_url: `https://info-compiler.netlify.app/?email=${res.data.email}`,
+          cancel_url: location.href
+        }).then((res) => location.href = res.data)
+          .catch((err) => console.log(err))
+      })
+
+  }
 
   return (
     <>
@@ -52,8 +81,8 @@ export default function Carshop() {
                 </div>
               </section>
               <div className='flex justify-between gap-x-6 w-[40%]'>
-                <button className='p-2 w-[50%] bg-green-500 hover:bg-black rounded-md text-white'>Buy</button>
-                <button className='p-2 w-[50%] bg-red-500 hover:bg-black rounded-md text-white'>Cancel</button>
+                <button className='p-2 w-[50%] bg-green-500 hover:bg-black rounded-md text-white' onClick={() => payModel(dt.Iduser, dt.price, dt.name)}>Buy</button>
+                <button className='p-2 w-[50%] bg-red-500 hover:bg-black rounded-md text-white' onClick={() => RemoveModel(dt.Iduser, dt.Id!)}>Cancel</button>
               </div>
             </div>
           ))

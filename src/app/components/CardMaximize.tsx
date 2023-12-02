@@ -8,9 +8,10 @@ import { useUser } from '@clerk/nextjs';
 import toast from 'react-hot-toast';
 
 const CardMaximize: React.FC<{ Id: number | undefined, name: string; description: string; Iduser: number, model: string | undefined, price: number, setPopup: Dispatch<SetStateAction<boolean>> }> = ({ Id, name, description, Iduser, model, price, setPopup }) => {
-    const [userdata, setUserdata] = useState<{ user: string, key_stripe: string }>({
+    const [userdata, setUserdata] = useState<{ user: string, key_stripe: string, email: string }>({
         user: "",
-        key_stripe: ""
+        key_stripe: "",
+        email: ""
     });
     const { user } = useUser();
 
@@ -20,14 +21,16 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
             setUserdata((dt) => ({
                 ...dt,
                 user: res.data.user,
-                key_stripe: res.data.key_stripe
+                key_stripe: res.data.key_stripe,
+                email: res.data.email
             }));
-            console.log(userdata);
 
         }
 
         getAuthor();
-    }, [])
+    }, []) 
+               console.log(userdata);
+
 
     const BuyModel = async () => {
         await axios.post(`https://stripe-node-microservice.vercel.app/api/stripe`, {
@@ -37,7 +40,7 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
             quantity: 1,
             currency: 'usd',
             name: name,
-            success_url: location.href,
+            success_url: `https://info-compiler.netlify.app/?email=${userdata.email}`,
             cancel_url: location.href
         }).then((res) => location.href = res.data)
             .catch((err) => console.log(err))
