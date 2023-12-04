@@ -1,13 +1,11 @@
 import axios from 'axios';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Canvas } from 'react-three-fiber';
-import { PresentationControls, Stage } from '@react-three/drei';
-import Model3dMake from './Model3dMake';
 import { useUser } from '@clerk/nextjs';
 import toast from 'react-hot-toast';
+import CanvasComponent from './CanvaComponent';
 
-const CardMaximize: React.FC<{ Id: number | undefined, name: string; description: string; Iduser: number, model: string | undefined, price: number, setPopup: Dispatch<SetStateAction<boolean>> }> = ({ Id, name, description, Iduser, model, price, setPopup }) => {
+const CardMaximize: React.FC<{ Id: number | undefined, name: string; description: string; Iduser: number, model: string | undefined, price: number, setPopup: Dispatch<SetStateAction<boolean>>}> = ({ Id, name, description, Iduser, model, price, setPopup}) => {
     const [userdata, setUserdata] = useState<{ user: string, key_stripe: string, email: string }>({
         user: "",
         key_stripe: "",
@@ -29,7 +27,7 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
 
         getAuthor();
     }, []) 
-               console.log(userdata);
+               console.log(model);
 
 
     const BuyModel = async () => {
@@ -71,23 +69,16 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
     }
 
     return (
-        <div className='p-3 w-[100%] bg-[#FFFFFF6F] opacity-90 rounded-md' style={{ backdropFilter: "blur(18px)" }}>
+        <div className={`p-3 w-[100%] bg-[#FFFFFF6F] opacity-90 rounded-md`} style={{ backdropFilter: "blur(18px)" }}>
             <div className='head flex border-b-[2px] border-green-600 p-2 justify-between'>
                 <h2 className='text-4xl text-white font-bold'>{name}</h2>
-                <div onClick={() => { setPopup(false) }}>
+                <div onClick={() => { setPopup(false), location.reload() }}>
                     <CancelIcon className='cursor-pointer text-white hover:text-gray-400 text-xl' />
                 </div>
             </div>
             <section className='body flex flex-col justify-start'>
                 <div className='w-[100%] flex justify-between mt-[3%] gap-x-2'>
-                    <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} style={{ width: "40%", borderRadius: "15px", height: "60vh" }}>
-                        <color attach="background" args={["#000"]} />
-                        <PresentationControls speed={1.5} zoom={.5} polar={[-0.1, Math.PI / 4]}>
-                            <Stage>
-                                <Model3dMake model={model} />
-                            </Stage>
-                        </PresentationControls>
-                    </Canvas>
+                    <CanvasComponent width='50%' height='50vh' model={model} />
                     <section className='w-[57%] flex flex-col flex-wrap items-center gap-y-16'>
                         <div className='bg-green-500 p-2 text-white text-4xl font-bold h-[7vh] rounded-md'>
                             $ {price}
