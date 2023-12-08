@@ -68,7 +68,7 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
     }
 
     return (
-        <div className={`p-3 w-[100%] h-[100vh] bg-[#FFFFFF6F] opacity-90 rounded-md`} style={{ backdropFilter: "blur(18px)" }}>
+        <div className={`p-3 w-[100%] h-[100vh] bg-gradient-to-t to-green-500 from-slate-500 opacity-90 rounded-md`} style={{ backdropFilter: "blur(18px)" }}>
             <div className='head flex border-b-[2px] border-green-600 p-2 justify-between'>
                 <h2 className='text-4xl text-white font-bold'>{name}</h2>
                 <div onClick={() => { location.href = "/" }}>
