@@ -16,7 +16,6 @@ export default function Nav() {
                     <Link href="/"><h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Home</h4></Link>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Services</h4>
                     <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>About</h4>
-                    <h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Enterprise</h4>
                     <Link href="/create-model"><h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Projects</h4></Link>
                     <Link href="/carshop"><h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Car Shop</h4></Link>
                     <Link href="/creations"><h4 className='text-gray-400 hover:text-green-500 cursor-pointer'>Creations</h4></Link>
