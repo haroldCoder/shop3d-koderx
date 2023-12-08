@@ -5,7 +5,7 @@ import { useUser } from '@clerk/nextjs';
 import toast from 'react-hot-toast';
 import CanvasComponent from './CanvaComponent';
 
-const CardMaximize: React.FC<{ Id: number | undefined, name: string; description: string; Iduser: number, model: string | undefined, price: number, setPopup: Dispatch<SetStateAction<boolean>>}> = ({ Id, name, description, Iduser, model, price, setPopup}) => {
+const CardMaximize: React.FC<{ Id: number | undefined, name: string; description: string; Iduser: number, model: string, price: number}> = ({ Id, name, description, Iduser, model, price}) => {
     const [userdata, setUserdata] = useState<{ user: string, key_stripe: string, email: string }>({
         user: "",
         key_stripe: "",
@@ -27,7 +27,6 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
 
         getAuthor();
     }, []) 
-               console.log(model);
 
 
     const BuyModel = async () => {
@@ -69,10 +68,10 @@ const CardMaximize: React.FC<{ Id: number | undefined, name: string; description
     }
 
     return (
-        <div className={`p-3 w-[100%] bg-[#FFFFFF6F] opacity-90 rounded-md`} style={{ backdropFilter: "blur(18px)" }}>
+        <div className={`p-3 w-[100%] h-[100vh] bg-[#FFFFFF6F] opacity-90 rounded-md`} style={{ backdropFilter: "blur(18px)" }}>
             <div className='head flex border-b-[2px] border-green-600 p-2 justify-between'>
                 <h2 className='text-4xl text-white font-bold'>{name}</h2>
-                <div onClick={() => { setPopup(false), location.reload() }}>
+                <div onClick={() => { location.href = "/" }}>
                     <CancelIcon className='cursor-pointer text-white hover:text-gray-400 text-xl' />
                 </div>
             </div>

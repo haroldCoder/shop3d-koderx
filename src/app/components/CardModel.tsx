@@ -4,11 +4,10 @@ import CardMaximize from './CardMaximize';
 import CanvasComponent from './CanvaComponent';
 
 export default function CardModel(data: Models) {
-    const [popup, setPopUp] = useState<boolean>(false);
     
   return (
     <>
-        <div onClick={()=>{setPopUp(true)}} className='bg-gray-900 w-[30%] flex flex-col gap-y-10 cursor-pointer p-8 rounded-md border-[1.5px] border-green-500 hover:bg-gradient-to-tr to-green-600 from-gray-700'>
+        <div onClick={()=>{location.href = `/models3d/${data.Id}`}} className='bg-gray-900 w-[30%] flex flex-col gap-y-10 cursor-pointer p-8 rounded-md border-[1.5px] border-green-500 hover:bg-gradient-to-tr to-green-600 from-gray-700'>
             <section className='model3d'>
                 <CanvasComponent width='100%' height='50vh' model={data.model?.modeluri} />
             </section>
@@ -23,15 +22,6 @@ export default function CardModel(data: Models) {
                 <button className='bg-gray-500 w-[100%] hover:bg-green-500 rounded-md p-3 text-white'>Buy</button>
             </footer>
         </div>
-        <div>
-                {
-                    popup ?
-                    <div className='absolute w-[65%] z-10 top-[15%] left-[20%]'>
-                        <CardMaximize Id={data.Id} setPopup={setPopUp} name={data.name} model={data.model?.modeluri} description={data.description} price={data.price} Iduser={data.Iduser} />
-                    </div>
-                    : null
-                }
-            </div>
     </>
   )
 }
