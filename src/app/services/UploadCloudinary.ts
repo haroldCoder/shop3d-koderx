@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const uploadToCloudinary = async (file: any, Id: number) => {
+const uploadToCloudinary = async (file: any, name: string) => {
     console.log(file);
     
     try {
@@ -9,7 +9,7 @@ const uploadToCloudinary = async (file: any, Id: number) => {
         formData.append("api_key", process.env.NEXT_PUBLIC_VITE_CLOUDINARY_KEY as string);
         formData.append("folder", "models3d")
         formData.append('upload_preset', process.env.NEXT_PUBLIC_VITE_UPLOAD as string); // Reemplaza TU_PRESET_DE_SUBIDA con tu propio preset de subida en Cloudinary
-        formData.append('public_id', `${Id}`);
+        formData.append('public_id', `${name}`);
 
         const response = await axios.post(
             'https://api.cloudinary.com/v1_1/coderx/image/upload',
