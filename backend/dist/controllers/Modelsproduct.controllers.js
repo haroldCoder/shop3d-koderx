@@ -72,6 +72,51 @@ class ModelsProduct extends connectMysql_1.default {
                 this.res.status(200).json(result[0]);
             });
         };
+        this.getModelById = (Id) => {
+            var _a;
+            const mongo = new UploadModels_controllers_1.default(this.req, this.res);
+            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`SELECT * FROM models WHERE Id = ${Id}`, (err, result) => __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    console.log(err);
+                    this.res.status(500).send(err);
+                    throw err;
+                }
+                const models3d = new Array();
+                yield Promise.all(result.map((md) => __awaiter(this, void 0, void 0, function* () {
+                    const model3D = yield mongo.getModels3d(md.Id);
+                    models3d.push(Object.assign(Object.assign({}, md), { model: model3D }));
+                })));
+                this.res.json(models3d[0]);
+            }));
+        };
+        this.getModelsByIduser = (idUser) => {
+            var _a;
+            const mongo = new UploadModels_controllers_1.default(this.req, this.res);
+            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`SELECT * FROM models WHERE Iduser = ${idUser}`, (err, result) => __awaiter(this, void 0, void 0, function* () {
+                if (err) {
+                    console.log(err);
+                    this.res.status(500).send(err);
+                    throw err;
+                }
+                const models3d = new Array();
+                yield Promise.all(result.map((md) => __awaiter(this, void 0, void 0, function* () {
+                    const model3D = yield mongo.getModels3d(md.Id);
+                    models3d.push(Object.assign(Object.assign({}, md), { model: model3D }));
+                })));
+                this.res.json(models3d);
+            }));
+        };
+        this.deleteModel = (idmodel) => {
+            var _a;
+            (_a = this.connect) === null || _a === void 0 ? void 0 : _a.execute(`DELETE FROM models WHERE Id = ${idmodel}`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    this.res.status(500).send(err);
+                    throw err;
+                }
+                this.res.status(200).send("model remove");
+            });
+        };
         this.req = req;
         this.res = res;
     }

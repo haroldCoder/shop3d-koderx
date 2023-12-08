@@ -77,6 +77,60 @@ class ModelsProduct extends ConnectMysql {
             this.res.status(200).json(result[0]);
         })
     }
+
+    getModelById = (Id: number) =>{
+        const mongo: UploadModel = new UploadModel(this.req, this.res);
+        this.connect?.execute(`SELECT * FROM models WHERE Id = ${Id}`, async(err, result: Array<Models>)=>{
+            if(err){
+                console.log(err);
+                this.res.status(500).send(err)
+                throw err;
+            }
+
+            const models3d: Array<any> = new Array<any>();
+            await Promise.all(result.map(async (md) => {
+                const model3D = await mongo.getModels3d(md.Id!);
+                
+                models3d.push({...md, model: model3D });
+            }));
+            
+
+            this.res.json(models3d[0]);
+        })
+    }
+
+    getModelsByIduser = (idUser: number) =>{
+        const mongo: UploadModel = new UploadModel(this.req, this.res);
+        this.connect?.execute(`SELECT * FROM models WHERE Iduser = ${idUser}`, async(err, result: Array<Models>)=>{
+            if(err){
+                console.log(err);
+                this.res.status(500).send(err)
+                throw err;
+            }
+
+            const models3d: Array<any> = new Array<any>();
+            await Promise.all(result.map(async (md) => {
+                const model3D = await mongo.getModels3d(md.Id!);
+                
+                models3d.push({...md, model: model3D });
+            }));
+            
+
+            this.res.json(models3d);
+        })
+    }
+
+    deleteModel = (idmodel: number) =>{
+        this.connect?.execute(`DELETE FROM models WHERE Id = ${idmodel}`, (err, result)=>{
+            if(err){
+                console.log(err);
+                this.res.status(500).send(err)
+                throw err;
+            }
+
+            this.res.status(200).send("model remove")
+        })
+    }
 }
 
 export default ModelsProduct;

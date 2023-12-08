@@ -26,4 +26,18 @@ router.route("/api/model/user/:iduser")
     const { iduser } = req.params;
     new Modelsproduct_controllers_1.default(req, res).getAuthorByIduser(parseInt(iduser));
 });
+router.route("/api/model/:Id")
+    .get((req, res) => {
+    const { Id } = req.params;
+    new Modelsproduct_controllers_1.default(req, res).getModelById(parseInt(Id));
+})
+    .delete((req, res) => {
+    const { Id } = req.params;
+    new Modelsproduct_controllers_1.default(req, res).deleteModel(parseInt(Id));
+});
+router.route("/api/models/user/prop/:iduser")
+    .get((req, res) => {
+    const { iduser } = req.params;
+    new Modelsproduct_controllers_1.default(req, res).getModelsByIduser(parseInt(iduser));
+});
 module.exports = router;
