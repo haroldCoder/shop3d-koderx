@@ -26,7 +26,7 @@ export default function Home(): JSX.Element {
 
     return (
         <div className='flex gap-x-8'>
-            <section className={`flex  h-[100vh] w-[auto] text-white`}>
+            <section className={`flex  min-h-[100vh] w-[auto] text-white`}>
                 <div className={`w-[85%] bg-gray-800 p-6 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <h1 className='text-xl'>Categories</h1>
                     <nav className='mt-5'>

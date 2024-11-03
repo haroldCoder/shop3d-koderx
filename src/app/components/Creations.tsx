@@ -53,8 +53,8 @@ export default function Creations() {
             <Nav />
             <div className='flex flex-wrap gap-y-5 p-4 flex-col items-center'>
                 {
-                    data && data.map((dt) => (
-                        <div className='flex bg-gradient-to-l to-green-500 h-[25vh] from-gray-600 rounded-md p-3 px-8 gap-x-10'>
+                    data && data.map((dt, index) => (
+                        <div key={index} className='flex bg-gradient-to-l to-green-500 h-[25vh] from-gray-600 rounded-md p-3 px-8 gap-x-10'>
                             <section>
                                 <Canvas>
                                     <color attach="background" args={["#000"]} />

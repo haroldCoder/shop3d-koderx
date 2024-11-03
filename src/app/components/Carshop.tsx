@@ -62,8 +62,8 @@ export default function Carshop() {
       <Nav />
       <div className='p-5 flex flex-col gap-y-12'>
         {
-          data.map((dt) => (
-            <div className='bg-white flex justify-between p-2 hover:bg-gray-400 w-[50%] h-[10vh] rounded-md'>
+          data.map((dt, index) => (
+            <div key={index} className='bg-white flex justify-between p-2 hover:bg-gray-400 w-[50%] h-[10vh] rounded-md'>
               <section className='flex gap-x-8 w-[40%]'>
                 <div className='w-[30%]'>
                   <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} className='rounded-md' style={{ marginTop: "3%" }}>
